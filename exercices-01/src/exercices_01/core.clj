@@ -133,3 +133,40 @@
 ;     and the function you created in Exercise 5.
 ;    The new function should take a collection of body parts
 ;     and the number of matching body parts to add.
+
+; (defn general-symmetry
+;   [asym-body-parts num-parts]
+;   body)
+
+(def asym-n-body-parts [{:name "head" :size 3}
+                        {:name "0-eye" :size 1}
+                        {:name "0-ear" :size 1}
+                        {:name "mouth" :size 1}
+                        {:name "nose" :size 1}
+                        {:name "0-upper-arm" :size 3}
+                        {:name "chest" :size 10}
+                        {:name "back" :size 10}
+                        {:name "0-forearm" :size 3}
+                        {:name "abdomen" :size 6}
+                        {:name "0-hand" :size 2}
+                        {:name "0-lower-leg" :size 3}
+                        {:name "0-foot" :size 2}])
+
+(defn part-with-num
+  [part num]
+  {:name (clojure.string/replace (:name part) #"^0-" (str num "-"))
+   :size (:size part)})
+
+(defn symmetrize-part-n-times
+  [part num]
+  (let [seq (take num (range))]
+       (into [] (map #(part-with-num part %) seq))))
+
+(defn symmetrize-n-body
+  [asym-body-parts num]
+  (reduce (fn [parts part]
+              (into parts (set (conj (symmetrize-part-n-times part num) part))))
+          []
+          asym-body-parts))
+
+(println (symmetrize-n-body asym-n-body-parts 3))
