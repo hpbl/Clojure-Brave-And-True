@@ -1,4 +1,4 @@
-(ns exercices-01.core
+(ns exercises-01.core
   (:gen-class))
 
 ; Exercises

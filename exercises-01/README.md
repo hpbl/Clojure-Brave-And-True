@@ -1,4 +1,4 @@
-# exercices-01
+# exercises-01
 
 FIXME: description
 
